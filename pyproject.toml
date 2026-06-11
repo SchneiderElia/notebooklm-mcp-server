@@ -1,0 +1,12 @@
+[project]
+name = "notebooklm-mcp-server"
+version = "0.1.0"
+description = "MCP Server connecting consumer NotebookLM to Claude Web via SSE"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=0.1.0",
+    "fastapi>=0.115.0",
+    "uvicorn>=0.30.0",
+    "notebooklm-py>=0.7.1"
+]

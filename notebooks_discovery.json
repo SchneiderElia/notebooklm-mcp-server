@@ -1,0 +1,314 @@
+{
+  "methods": {
+    "create": {
+      "id": "discoveryengine.projects.locations.notebooks.create",
+      "path": "v1alpha/{+parent}/notebooks",
+      "flatPath": "v1alpha/projects/{projectsId}/locations/{locationsId}/notebooks",
+      "httpMethod": "POST",
+      "parameters": {
+        "parent": {
+          "description": "Required. The parent resource name, such as `projects/{project}/locations/{location}`.",
+          "pattern": "^projects/[^/]+/locations/[^/]+$",
+          "location": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "parameterOrder": [
+        "parent"
+      ],
+      "request": {
+        "$ref": "GoogleCloudNotebooklmV1alphaNotebook"
+      },
+      "response": {
+        "$ref": "GoogleCloudNotebooklmV1alphaNotebook"
+      },
+      "scopes": [
+        "https://www.googleapis.com/auth/cloud-platform",
+        "https://www.googleapis.com/auth/discoveryengine.readwrite",
+        "https://www.googleapis.com/auth/discoveryengine.serving.readwrite"
+      ],
+      "description": "Creates a notebook."
+    },
+    "get": {
+      "id": "discoveryengine.projects.locations.notebooks.get",
+      "path": "v1alpha/{+name}",
+      "flatPath": "v1alpha/projects/{projectsId}/locations/{locationsId}/notebooks/{notebooksId}",
+      "httpMethod": "GET",
+      "parameters": {
+        "name": {
+          "description": "Required. Full resource name of Notebook, such as `projects/{project}/locations/{location}/notebooks/{notebook_id}`.",
+          "pattern": "^projects/[^/]+/locations/[^/]+/notebooks/[^/]+$",
+          "location": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "parameterOrder": [
+        "name"
+      ],
+      "response": {
+        "$ref": "GoogleCloudNotebooklmV1alphaNotebook"
+      },
+      "scopes": [
+        "https://www.googleapis.com/auth/cloud-platform",
+        "https://www.googleapis.com/auth/discoveryengine.readwrite",
+        "https://www.googleapis.com/auth/discoveryengine.serving.readwrite"
+      ],
+      "description": "Gets a notebook."
+    },
+    "listRecentlyViewed": {
+      "id": "discoveryengine.projects.locations.notebooks.listRecentlyViewed",
+      "path": "v1alpha/{+parent}/notebooks:listRecentlyViewed",
+      "flatPath": "v1alpha/projects/{projectsId}/locations/{locationsId}/notebooks:listRecentlyViewed",
+      "httpMethod": "GET",
+      "parameters": {
+        "parent": {
+          "description": "Required. The parent branch resource name, such as `projects/{project}/locations/{location}`.",
+          "pattern": "^projects/[^/]+/locations/[^/]+$",
+          "location": "path",
+          "required": true,
+          "type": "string"
+        },
+        "pageSize": {
+          "description": "Optional. Maximum number of Notebooks to return. If unspecified, defaults to \"500\". The maximum allowed value is \"500\". If this field is negative, will use the default value.",
+          "location": "query",
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageToken": {
+          "description": "Optional. The page token, provide this to retrieve the subsequent page.",
+          "location": "query",
+          "type": "string"
+        }
+      },
+      "parameterOrder": [
+        "parent"
+      ],
+      "response": {
+        "$ref": "GoogleCloudNotebooklmV1alphaListRecentlyViewedNotebooksResponse"
+      },
+      "scopes": [
+        "https://www.googleapis.com/auth/cloud-platform",
+        "https://www.googleapis.com/auth/discoveryengine.readwrite",
+        "https://www.googleapis.com/auth/discoveryengine.serving.readwrite"
+      ],
+      "description": "Lists the notebooks ordered by last view time."
+    },
+    "batchDelete": {
+      "id": "discoveryengine.projects.locations.notebooks.batchDelete",
+      "path": "v1alpha/{+parent}/notebooks:batchDelete",
+      "flatPath": "v1alpha/projects/{projectsId}/locations/{locationsId}/notebooks:batchDelete",
+      "httpMethod": "POST",
+      "parameters": {
+        "parent": {
+          "description": "Required. The parent branch resource name, such as `projects/{project}/locations/{location}`.",
+          "pattern": "^projects/[^/]+/locations/[^/]+$",
+          "location": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "parameterOrder": [
+        "parent"
+      ],
+      "request": {
+        "$ref": "GoogleCloudNotebooklmV1alphaBatchDeleteNotebooksRequest"
+      },
+      "response": {
+        "$ref": "GoogleProtobufEmpty"
+      },
+      "scopes": [
+        "https://www.googleapis.com/auth/cloud-platform",
+        "https://www.googleapis.com/auth/discoveryengine.readwrite",
+        "https://www.googleapis.com/auth/discoveryengine.serving.readwrite"
+      ],
+      "description": "Batch deletes Notebooks."
+    },
+    "share": {
+      "id": "discoveryengine.projects.locations.notebooks.share",
+      "path": "v1alpha/{+name}:share",
+      "flatPath": "v1alpha/projects/{projectsId}/locations/{locationsId}/notebooks/{notebooksId}:share",
+      "httpMethod": "POST",
+      "parameters": {
+        "name": {
+          "description": "Required. Full resource name of Notebook, such as `projects/{project}/locations/{location}/notebooks/{notebook_id}`.",
+          "pattern": "^projects/[^/]+/locations/[^/]+/notebooks/[^/]+$",
+          "location": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "parameterOrder": [
+        "name"
+      ],
+      "request": {
+        "$ref": "GoogleCloudNotebooklmV1alphaShareNotebookRequest"
+      },
+      "response": {
+        "$ref": "GoogleCloudNotebooklmV1alphaShareNotebookResponse"
+      },
+      "scopes": [
+        "https://www.googleapis.com/auth/cloud-platform",
+        "https://www.googleapis.com/auth/discoveryengine.readwrite",
+        "https://www.googleapis.com/auth/discoveryengine.serving.readwrite"
+      ],
+      "description": "Shares a notebook to other accounts."
+    }
+  },
+  "resources": {
+    "audioOverviews": {
+      "methods": {
+        "create": {
+          "id": "discoveryengine.projects.locations.notebooks.audioOverviews.create",
+          "path": "v1alpha/{+parent}/audioOverviews",
+          "flatPath": "v1alpha/projects/{projectsId}/locations/{locationsId}/notebooks/{notebooksId}/audioOverviews",
+          "httpMethod": "POST",
+          "parameters": {
+            "parent": {
+              "description": "Required. The parent resource where this notebook will be created. Format: projects/{project}/locations/{location}/notebooks/{notebook}",
+              "pattern": "^projects/[^/]+/locations/[^/]+/notebooks/[^/]+$",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "parameterOrder": [
+            "parent"
+          ],
+          "request": {
+            "$ref": "GoogleCloudNotebooklmV1alphaCreateAudioOverviewRequest"
+          },
+          "response": {
+            "$ref": "GoogleCloudNotebooklmV1alphaCreateAudioOverviewResponse"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/discoveryengine.readwrite",
+            "https://www.googleapis.com/auth/discoveryengine.serving.readwrite"
+          ],
+          "description": "Generates a new audio overview."
+        },
+        "delete": {
+          "id": "discoveryengine.projects.locations.notebooks.audioOverviews.delete",
+          "path": "v1alpha/{+name}",
+          "flatPath": "v1alpha/projects/{projectsId}/locations/{locationsId}/notebooks/{notebooksId}/audioOverviews/{audioOverviewsId}",
+          "httpMethod": "DELETE",
+          "parameters": {
+            "name": {
+              "description": "Required. The full resource name of the AudioOverview, such as `projects/{project}/locations/{location}/notebooks/{notebook}/audioOverviews/{audio_overview_id}`.",
+              "pattern": "^projects/[^/]+/locations/[^/]+/notebooks/[^/]+/audioOverviews/[^/]+$",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "parameterOrder": [
+            "name"
+          ],
+          "response": {
+            "$ref": "GoogleProtobufEmpty"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/discoveryengine.readwrite",
+            "https://www.googleapis.com/auth/discoveryengine.serving.readwrite"
+          ],
+          "description": "Deletes an audio overview."
+        }
+      }
+    },
+    "sources": {
+      "methods": {
+        "batchCreate": {
+          "id": "discoveryengine.projects.locations.notebooks.sources.batchCreate",
+          "path": "v1alpha/{+parent}/sources:batchCreate",
+          "flatPath": "v1alpha/projects/{projectsId}/locations/{locationsId}/notebooks/{notebooksId}/sources:batchCreate",
+          "httpMethod": "POST",
+          "parameters": {
+            "parent": {
+              "description": "Required. The parent resource where the sources will be created. Format: projects/{project}/locations/{location}/notebooks/{notebook}",
+              "pattern": "^projects/[^/]+/locations/[^/]+/notebooks/[^/]+$",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "parameterOrder": [
+            "parent"
+          ],
+          "request": {
+            "$ref": "GoogleCloudNotebooklmV1alphaBatchCreateSourcesRequest"
+          },
+          "response": {
+            "$ref": "GoogleCloudNotebooklmV1alphaBatchCreateSourcesResponse"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/discoveryengine.assist.readwrite",
+            "https://www.googleapis.com/auth/discoveryengine.readwrite",
+            "https://www.googleapis.com/auth/discoveryengine.serving.readwrite"
+          ],
+          "description": "Creates a list of Sources."
+        },
+        "get": {
+          "id": "discoveryengine.projects.locations.notebooks.sources.get",
+          "path": "v1alpha/{+name}",
+          "flatPath": "v1alpha/projects/{projectsId}/locations/{locationsId}/notebooks/{notebooksId}/sources/{sourcesId}",
+          "httpMethod": "GET",
+          "parameters": {
+            "name": {
+              "description": "Required. The resource name for source Format: projects/{project}/locations/{location}/notebooks/{notebook}/sources/{source}",
+              "pattern": "^projects/[^/]+/locations/[^/]+/notebooks/[^/]+/sources/[^/]+$",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "parameterOrder": [
+            "name"
+          ],
+          "response": {
+            "$ref": "GoogleCloudNotebooklmV1alphaSource"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/discoveryengine.readwrite",
+            "https://www.googleapis.com/auth/discoveryengine.serving.readwrite"
+          ],
+          "description": "Gets a Source."
+        },
+        "batchDelete": {
+          "id": "discoveryengine.projects.locations.notebooks.sources.batchDelete",
+          "path": "v1alpha/{+parent}/sources:batchDelete",
+          "flatPath": "v1alpha/projects/{projectsId}/locations/{locationsId}/notebooks/{notebooksId}/sources:batchDelete",
+          "httpMethod": "POST",
+          "parameters": {
+            "parent": {
+              "description": "Required. The parent resource where the sources will be deleted. Format: projects/{project}/locations/{location}/notebooks/{notebook}",
+              "pattern": "^projects/[^/]+/locations/[^/]+/notebooks/[^/]+$",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "parameterOrder": [
+            "parent"
+          ],
+          "request": {
+            "$ref": "GoogleCloudNotebooklmV1alphaBatchDeleteSourcesRequest"
+          },
+          "response": {
+            "$ref": "GoogleProtobufEmpty"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/discoveryengine.readwrite",
+            "https://www.googleapis.com/auth/discoveryengine.serving.readwrite"
+          ],
+          "description": "Deletes multiple sources"
+        }
+      }
+    }
+  }
+}
