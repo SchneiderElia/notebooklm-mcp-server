@@ -62,21 +62,45 @@ This server implements the complete set of NotebookLM capabilities, mapping them
 
 ## Running the Server
 
-1. **Start the MCP Server**:
+### Option A: Quick Start via Windows Batch Files (Recommended)
+
+If you are on Windows, you can use the pre-configured batch launchers in the root folder:
+
+1. **ngrok Tunnel (Static Domain)**:
+   Double-click **`start_notebooklm_mcp_ngrok.bat`**. This will automatically:
+   - Configure `NOTEBOOKLM_REFRESH_CMD` to silently extract cookies from the **Brave** browser when session expires.
+   - Start the local FastAPI/Starlette MCP server on port `8000`.
+   - Start the ngrok tunnel using the configured static domain.
+
+2. **Alternative Tunnel (localhost.run)**:
+   Double-click **`start_notebooklm_mcp.bat`** to start the server with a dynamic `localhost.run` tunnel (useful if you don't have a static ngrok domain).
+
+### Option B: Manual Execution (Command Line)
+
+If you want to run the commands manually:
+
+1. **Set Environment Variable (Optional for silent auto-login)**:
+   ```cmd
+   set NOTEBOOKLM_REFRESH_CMD="path\to\.venv\Scripts\notebooklm.exe" login --browser-cookies brave
+   ```
+
+2. **Start the MCP Server**:
    ```bash
    .venv\Scripts\python -m uvicorn main:app --host 127.0.0.1 --port 8000
    ```
 
-2. **Expose with ngrok**:
+3. **Expose with ngrok**:
    ```bash
    ngrok http --url=your-domain.ngrok-free.dev 127.0.0.1:8000
    ```
 
-3. **Register on Claude Web**:
-   * Go to **Settings** -> **Developer** -> **Add Custom Connector**.
-   * Name: `NotebookLM MCP`
-   * URL: `https://your-domain.ngrok-free.dev/mcp`
-   * Leave authentication fields empty.
+## Register on Claude Web
+
+1. Go to your **Claude.ai** profile -> **Settings** -> **Developer** -> **Add Custom Connector**.
+2. Set the name to **`NotebookLM MCP`** (do *not* use just "NotebookLM" to avoid built-in template conflicts).
+3. Insert your tunnel URL: `https://your-domain.ngrok-free.dev/mcp`
+4. Leave all OAuth and authentication fields completely empty.
+5. Click **Add Connector**.
 
 ---
 
