@@ -172,6 +172,28 @@ async def add_web_source(notebook_id: str, url: str) -> str:
         return f"Error adding web source: {str(e)}"
 
 @mcp.tool()
+async def rename_source(notebook_id: str, source_id: str, new_title: str) -> str:
+    """Rename an existing source inside a NotebookLM notebook.
+    
+    Args:
+        notebook_id: The ID of the notebook.
+        source_id: The ID of the source to rename.
+        new_title: The new title for the source.
+        
+    Returns:
+        Confirmation message with the renamed source details.
+    """
+    try:
+        c = get_client()
+        src = await c.sources.rename(notebook_id, source_id, new_title)
+        if src:
+            return f"Successfully renamed source to '{src.title}' (ID: {src.id})."
+        else:
+            return f"Successfully renamed source to '{new_title}'."
+    except Exception as e:
+        return f"Error renaming source: {str(e)}"
+
+@mcp.tool()
 async def query_notebook(notebook_id: str, question: str, source_ids: list[str] = None) -> str:
     """Ask a question to the NotebookLM notebook. It processes all or specific sources and returns a grounded answer with citations.
     
