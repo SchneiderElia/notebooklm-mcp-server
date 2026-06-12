@@ -50,15 +50,20 @@ This server implements the complete set of NotebookLM capabilities, mapping them
    ```
 
 4. **Authenticate**:
-   You can authenticate the client by extracting cookies automatically from your browser (e.g., Brave, Chrome, Edge, Firefox):
-   ```bash
-   .venv\Scripts\notebooklm login --browser-cookies brave
-   ```
-   *Alternatively, if automatic extraction fails or you prefer an interactive login, run:*
-   ```bash
-   .venv\Scripts\notebooklm login
-   ```
-   This will open a browser window for a manual Google login and save the session automatically.
+   Google NotebookLM does not have an official API, so this connector uses your browser's session cookies.
+   
+   - **Interactive Login (Default / Brave / Chrome / Edge)**:
+     On Windows, Chromium-based browsers (Brave, Chrome, Edge) use App-Bound Encryption, which prevents external scripts from decrypting their cookies. To authenticate:
+     ```bash
+     .venv\Scripts\notebooklm login
+     ```
+     This opens a Playwright browser window. Log into your Google account, close the window, and your session will be saved locally.
+     
+   - **Silent Background Auto-Refresh (Firefox only)**:
+     If you have Firefox installed, you can extract cookies silently without interactive prompts. Log into Google on Firefox first, then run:
+     ```bash
+     .venv\Scripts\notebooklm login --browser-cookies firefox
+     ```
 
 ## Running the Server
 
@@ -68,20 +73,22 @@ If you are on Windows, you can use the pre-configured batch launchers in the roo
 
 1. **ngrok Tunnel (Static Domain)**:
    Double-click **`start_notebooklm_mcp_ngrok.bat`**. This will automatically:
-   - Configure `NOTEBOOKLM_REFRESH_CMD` to silently extract cookies from the **Brave** browser when session expires.
+   - Check if your Google session is still valid. If it has expired, it prompts you to press a key to run the interactive login browser window.
    - Start the local FastAPI/Starlette MCP server on port `8000`.
    - Start the ngrok tunnel using the configured static domain.
+   
+   *(Optional: If you use Firefox and want silent auto-refresh, open the batch file and uncomment the `NOTEBOOKLM_REFRESH_CMD` line configured with `firefox`)*.
 
 2. **Alternative Tunnel (localhost.run)**:
-   Double-click **`start_notebooklm_mcp.bat`** to start the server with a dynamic `localhost.run` tunnel (useful if you don't have a static ngrok domain).
+   Double-click **`start_notebooklm_mcp.bat`** to start the server with a dynamic `localhost.run` tunnel. It also includes the session verification check.
 
 ### Option B: Manual Execution (Command Line)
 
 If you want to run the commands manually:
 
-1. **Set Environment Variable (Optional for silent auto-login)**:
+1. **Set Environment Variable for Silent Auto-Login (Firefox only)**:
    ```cmd
-   set NOTEBOOKLM_REFRESH_CMD="path\to\.venv\Scripts\notebooklm.exe" login --browser-cookies brave
+   set NOTEBOOKLM_REFRESH_CMD="path\to\.venv\Scripts\notebooklm.exe" login --browser-cookies firefox
    ```
 
 2. **Start the MCP Server**:
