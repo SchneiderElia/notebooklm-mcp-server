@@ -115,6 +115,15 @@ If you want to run the commands manually:
 
 You can connect this MCP server directly to **Antigravity / Gemini** to let the AI assistant query your NotebookLM notebooks from any project.
 
+### 💡 The Easy Way (Automated via Chat)
+Since Antigravity is a fully agentic coding assistant, you don't need to edit files manually! You can simply ask the assistant in the chat:
+> *"Aggiungi il connettore NotebookLM ai miei server MCP"* (or *"Add the NotebookLM connector to my MCP servers"*)
+
+The assistant will automatically locate your `mcp_config.json` file, detect the correct paths for your workspace/virtual environment, and configure the connector for you.
+
+### 🛠️ The Manual Way
+If you prefer to configure it manually:
+
 1. Open the Antigravity global MCP configuration file:
    - Path on Windows: `C:\Users\User\.gemini\config\mcp_config.json`
 2. Add the `notebooklm` configuration block under `mcpServers`:
