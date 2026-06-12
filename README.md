@@ -111,6 +111,35 @@ If you want to run the commands manually:
 
 ---
 
+## Register on Antigravity (Gemini Coding Assistant)
+
+You can connect this MCP server directly to **Antigravity / Gemini** to let the AI assistant query your NotebookLM notebooks from any project.
+
+1. Open the Antigravity global MCP configuration file:
+   - Path on Windows: `C:\Users\User\.gemini\config\mcp_config.json`
+2. Add the `notebooklm` configuration block under `mcpServers`:
+   ```json
+   "notebooklm": {
+     "command": "d:\\nsb\\notebookLM\\.venv\\Scripts\\python.exe",
+     "args": [
+       "main.py",
+       "--stdio"
+     ],
+     "cwd": "d:\\nsb\\notebookLM"
+   }
+   ```
+   *(Note: Double check that the paths point to your actual project directory and virtual environment, escaping backslashes as `\\`)*.
+3. Save the file. Antigravity will automatically reload and enable the NotebookLM tools.
+
+### Example Chat Prompts for Antigravity:
+You can now ask the AI assistant to perform actions directly in your chat:
+- **List notebooks:** *"Elenca i miei blocchi appunti su NotebookLM"*
+- **Query notes:** *"Chiedi a NotebookLM sul blocco appunti 'React' come si gestiscono gli stati"*
+- **Add sources:** *"Aggiungi la pagina web https://react.dev come fonte nel blocco appunti 'React'"*
+- **Generate Study Guides / Audio Overviews:** *"Genera un documento di sintesi per il blocco appunti 'React'"*
+
+---
+
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
