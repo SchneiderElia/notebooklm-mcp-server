@@ -3,13 +3,25 @@ from mcp.server.fastmcp import FastMCP
 from contextlib import asynccontextmanager
 from notebooklm import NotebookLMClient, ReportFormat
 
-# 1. Initialize FastMCP
-mcp = FastMCP("NotebookLM MCP Server")
+# 1. Define native FastMCP lifespan context manager
+@asynccontextmanager
+async def mcp_lifespan(server):
+    global client
+    print("Initializing NotebookLM MCP Server...")
+    # Open client session on startup using the default profile with background keepalive (every 10 minutes)
+    async with NotebookLMClient.from_storage(keepalive=600) as active_client:
+        client = active_client
+        print("NotebookLM Client connected.")
+        yield
+    print("NotebookLM MCP Server shutting down...")
+
+# 2. Initialize FastMCP with lifespan
+mcp = FastMCP("NotebookLM MCP Server", lifespan=mcp_lifespan)
 
 # Disable DNS rebinding protection to allow connection via public tunnels (ngrok, localhost.run, etc.)
 mcp.settings.transport_security.enable_dns_rebinding_protection = False
 
-# 2. Global client reference managed by lifespan
+# 3. Global client reference managed by lifespan
 client = None
 
 def get_client() -> NotebookLMClient:
@@ -503,24 +515,12 @@ async def generate_data_table(notebook_id: str) -> str:
 # 4. Starlette / FastMCP App Setup
 app = mcp.streamable_http_app()
 
-@asynccontextmanager
-async def combined_lifespan(starlette_app):
-    global client
-    print("Initializing NotebookLM MCP Server...")
-    # Open client session on startup using the default profile with background keepalive (every 10 minutes)
-    async with NotebookLMClient.from_storage(keepalive=600) as active_client:
-        client = active_client
-        print("NotebookLM Client connected. Starting MCP session manager...")
-        # Run FastMCP's own session manager to handle SSE
-        async with mcp.session_manager.run():
-            print("NotebookLM MCP Server is fully ready and listening.")
-            yield
-    print("NotebookLM MCP Server shutting down...")
-
-app.router.lifespan_context = combined_lifespan
-
 if __name__ == "__main__":
-    import uvicorn
-    port = int(os.environ.get("PORT", 8000))
-    host = os.environ.get("HOST", "0.0.0.0")
-    uvicorn.run(app, host=host, port=port)
+    import sys
+    if "--stdio" in sys.argv:
+        mcp.run(transport="stdio")
+    else:
+        import uvicorn
+        port = int(os.environ.get("PORT", 8000))
+        host = os.environ.get("HOST", "0.0.0.0")
+        uvicorn.run(app, host=host, port=port)
