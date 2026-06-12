@@ -178,8 +178,14 @@ Chiedi semplicemente all'assistente:
 
 *(Nota: puoi recuperare gli ID dei notebook e delle fonti usando i tool `list_notebooks` e `get_notebook_details`)*.
 
-### Risoluzione Problemi: I nuovi tool non compaiono in chat?
-Se modifichi il server MCP o aggiorni il codice e l'assistente chat ti dice di non avere a disposizione il tool `rename_source`, significa che l'editor/IDE ha in cache il vecchio processo del server.
+### Risoluzione Problemi
+
+#### 1. Il connettore su Claude Web si disconnette o non risponde?
+A causa dell'inattività temporanea dei tunnel gratuiti (come ngrok o localhost.run), Claude Web potrebbe contrassegnare il connettore come disconnesso.
+* **Come risolvere:** Questa è la **prima cosa da fare**: vai su Claude.ai -> **Settings** -> **Developer** -> **Custom Connectors**, trova `NotebookLM MCP` e clicca su **"Reconnect"** (o "Riconnetti"). Questo riattiverà immediatamente il collegamento svegliando il tunnel locale.
+
+#### 2. I nuovi tool (come rename_source) non compaiono in chat?
+Se aggiorni il codice del server MCP e l'assistente ti dice di non avere a disposizione un determinato tool, significa che l'editor/IDE sta ancora eseguendo il vecchio processo in background.
 * **Come risolvere:** Chiudi completamente l'IDE (VS Code, Cursor, Windsurf, ecc.) e riaprilo, oppure vai nelle impostazioni dei server MCP del tuo IDE e clicca su **"Restart"** o **"Reload"** di fianco al server `notebooklm`.
 
 ---
